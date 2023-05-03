@@ -91,8 +91,6 @@ Mario Remastered trata-se de um pequeno remake que inclui apenas 1 nível no tot
 
 - ficheiro de texto com informação sobre os controlos do jogo, criador, demo, bugs, créditos aos autores da música, etc.
 
----
-
 ### Game1
 
 > ##### Variáveis
