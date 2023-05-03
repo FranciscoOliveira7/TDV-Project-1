@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Çağla/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/backgroundmusic.mp3</SourceFile>
+  <SourceTime>2019-05-26T13:18:38+03:00</SourceTime>
+  <DestFile>C:/Users/Çağla/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/bin/Windows/Content/backgroundmusic.xnb</DestFile>
+  <DestTime>2019-05-26T19:26:23.7930613+03:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2018-12-08T19:35:54+03:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2018-12-08T19:35:54+03:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>C:/Users/Çağla/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/bin/Windows/Content/backgroundmusic.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

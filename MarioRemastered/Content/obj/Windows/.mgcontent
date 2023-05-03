@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/aa.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/altin.wav</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/back.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/backgroundmusic.mp3</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/coin.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/goomba.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/ground.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/ground2.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/ground3.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/grow.wav</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/jump.wav</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/kutu.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/kutu_off.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/kutular.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/mantar.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/pipe.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/pipe_mini.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/player.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_jump_left.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_jump_left_fire.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_jump_left_mini.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_jump_right.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_jump_right_fire.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_jump_right_mini.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_stand_left.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_stand_left_fire.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_stand_left_mini.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_stand_right.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_stand_right_fire.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_stand_right_mini.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_walk_left.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_walk_left_fire.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_walk_left_mini.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_walk_right.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_walk_right_fire.png</File>
+    <File>C:/Users/Ahmet/Documents/Visual Studio 2015/Projects/MarioRemastered/MarioRemastered/Content/texture_walk_right_mini.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
