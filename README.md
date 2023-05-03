@@ -28,7 +28,7 @@ Mario Remastered trata-se de um pequeno remake que inclui apenas 1 nível no tot
 
 ## Organização das Pastas e Ficheiros
 
-#### Pasta Inicial - "marioremastered"
+### Pasta Inicial - "marioremastered"
 
 - Esta pasta inicial contêm as seguintes subpastas e ficheiros:
   - .git;
@@ -90,6 +90,36 @@ Mario Remastered trata-se de um pequeno remake que inclui apenas 1 nível no tot
 ##### README
 
 - ficheiro de texto com informação sobre os controlos do jogo, criador, demo, bugs, créditos aos autores da música, etc.
+
+---
+
+# Estrutura do Código
+
+- **Game1:** Classe principal do jogo, onde é feita a inicialização dos elemntos do jogo como também as atualizaçõe de frames;
+
+- **Coin:** Classe da moeda onde se encontra o sfx da moeda e o método para quando ela é apanhada:
+
+- **CoinGround:** Classe que gere a moeda quando está no chão;
+
+- **Collectible:** Classe Pai que define todas as propriedades e métodos compartilhados com todos os coletáveis;
+
+- **Ground:** Classe onde é gerida ;
+
+- **Monster**;
+
+- **Mushroom**;
+
+- **MushroomGround**;
+
+- **Player:** A classe que gere o personagem jogável pelo jogador é responsável por atualizar a sua posição, animação e detecção de colisão;
+
+- **Program**;
+
+- **StartScreen**;
+
+- **StartScreen.Designer:** Classe onde está o código gerado pelo windows form.
+
+---
 
 ### Game1
 
@@ -262,7 +292,7 @@ Mario Remastered trata-se de um pequeno remake que inclui apenas 1 nível no tot
 > 
 > Aqui estão as texturas do Mário, porporções (`width`, `height`), velocidade, posição, algumas variáveis auxiliares relacionadas ao movimento, moedas e tamanho (mini, normal).
 
-> ##### Damage
+> ##### Dano
 > 
 > ```cs
 > public void takeDamage() {
@@ -278,11 +308,40 @@ Mario Remastered trata-se de um pequeno remake que inclui apenas 1 nível no tot
 > 
 > Caso o Mário esteja no modo mini ele morre, senão diminui de tamanho e ajusta a posição para compensar a mudança de largura.
 
-> #### dwqd
+> #### Gravidade
+> 
+> ```cs
+> public void gravity() {
+>     if (!collusingBottom) {
+>         setVelY(1); //0.95
+>         jumping = true;
+>     }
+>     else velocity.Y = 0;                
+> }
+> ```
+> 
+> Verifica se tem colisão com o chão, caso contrário define a velocidade da Y axix para poder cair
+
+> #### Salto
+> 
+> ```cs
+> public void jump() {          
+>     if (!jumping && !collusingTop) {
+>         collusingBottom = false;
+>         jumping = true;                
+>         if (velocity.X > 3 || velocity.X < -3) {
+>             velocity.Y -= 30;
+>         }
+>         else velocity.Y -= 20;
+>     }
+> }
+> ```
+> 
+> Verifica se o player não está a saltar nem tem nenhum teto em cima, aplica uma velocidade na Y axis.
 
 ---
 
-## Collectibles
+### Collectibles
 
 ### Coin
 
@@ -324,4 +383,512 @@ Mario Remastered trata-se de um pequeno remake que inclui apenas 1 nível no tot
 > 
 > Inicializa o counter com valor 0
 > 
+> Cria o objeto altin que é o soundeffect da coin.### CoinGround
+
+> ```cs
+> int counter = 0;
+> static SoundEffect altin;
+> public CoinGround(int sayac,ContentManager content, Player player, string tex, int x, int y) : base(content, player, tex, x, y)
+> {
+>     counter = sayac;
+>     altin = content.Load<SoundEffect>("altin");
+> }
+> ```
+> 
+> Inicializa o counter com valor 0
+> 
 > Cria o objeto altin que é o soundeffect da coin.
+
+> ```cs
+> public override void newTop()
+> {
+>     refresh();
+>     if (gnd.Intersects(player.getT()))
+>     {
+>         if (counter > 0)
+>         {
+>             counter--;
+>             player.collectCoin();
+>             altin.Play(1, 0, 0);
+>             if (counter == 0)
+>             {
+>                 texture = off;
+>             }                    
+>         }
+>         if (!player.collusingTop)
+>         {
+>             player.velocity.Y = 0;
+>             player.jumping = true;
+>             player.collusingTop = true;
+>             player.position.Y = gnd.Y + height;
+>         }
+>     }
+>     else
+>     {
+>         player.collusingTop = false;
+>     }
+> }
+> ```
+> 
+> Verifica se o player esta em contacto com a hitbox da moeda e tambem verifica se aidna existe alguma moeda se existir moeda ela desaparece do mapa e aciona o soundeffect altin. 
+
+### Mushroom
+
+> ```cs
+> public bool collusingTop , collusingBot , collusingRight , collusingLeft;
+> static SoundEffect grow;
+> public Rectangle bot, top, right, left;
+> public Vector2 velocity = new Vector2(0, 0);
+> public Mushroom(ContentManager content, Player player, string tex, int x, int y) : base(content, player, tex, x, y)
+> {
+>     bot = new Rectangle((int)position.X + 5, (int)position.Y + height - 5, width - 10, 5);
+>     top = new Rectangle((int)position.X + 5, (int)position.Y, width - 10, 5);
+>     left = new Rectangle((int)position.X, (int)position.Y + 5, 5, height - 10);
+>     right = new Rectangle((int)position.X + width - 5, (int)position.Y + 5, 5, height - 10);
+>     grow = content.Load<SoundEffect>("grow");
+> }
+> ```
+> 
+> Guarda informações com objetos, soundeffect de cresciento do player, hitbox e a velocidade do mushroom.
+> 
+> Cria a hitbox do mushroom e carrega o soundeffect grow.
+
+> ```cs
+> public override void collect() {
+>     player.size = 1;
+>     grow.Play(1, 0, 0);
+> }
+> ```
+> 
+> Se player coletar o coletar o cogumelo o tamanho dele muda e da play no soundeffect grow.
+
+> ```cs
+> public void refreshAll() {
+>     bot.X = (int)position.X + 5;
+>     bot.Y = (int)position.Y + height - 5;
+>     top.X = (int)position.X + 5;
+>     top.Y = (int)position.Y;
+>     left.X = (int)position.X;
+>     left.Y = (int)position.Y + 5;
+>     right.X = (int)position.X + width - 5;
+>     right.Y = (int)position.Y + 5;
+> }
+> 
+> public Rectangle getTop() {
+>     refreshAll();
+>     return top;
+> }
+> public Rectangle getBot() {
+>     refreshAll();
+>     return bot;
+> }
+> public Rectangle getLeft() {
+>     refreshAll();
+>     return left;
+> }
+> public Rectangle getRight() {
+>     refreshAll();
+>     return right;
+> }
+> ```
+> 
+> Faz o controlo da posição do cogumelo inimigo e da sua hitbox
+
+### MushroomGround
+
+> ```cs
+> public Mushroom m;
+> int counter = 1;
+> public bool addedToList = false;
+> public Texture2D off;
+> public MushroomGround(ContentManager content, Player player, string tex, int x, int y) : base(content, player, tex, x, y) {
+>     off = content.Load<Texture2D>("kutu_off");
+> }
+> ```
+> 
+> Faz com que o cogumelo desapareca se for coletado
+
+> ```cs
+> public override void newTop() {
+>     refresh();
+>     if (gnd.Intersects(player.getT())) {
+>         if (counter == 1 && m==null) {
+>             counter--;
+>             m = new Mushroom(content, player, "mantar", (int)position.X, (int)position.Y-48);
+>             texture = off;
+>         }
+>         if (!player.collusingTop) {
+>             player.velocity.Y = 0;
+>             player.jumping = true;
+>             player.collusingTop = true;
+>             player.position.Y = gnd.Y + height;
+>         }
+>     }
+>     else player.collusingTop = false;
+> }
+> ```
+> 
+> Faz com que o cogumelo desapareca se for coletado e que continue o salto.
+
+### StartScreen.cs
+
+> ```csharp
+> public partial class StartScreen : Form {
+>     public StartScreen() {
+>         InitializeComponent();
+>     }
+> 
+>     private void button1_Click(object sender, EventArgs e) {
+>         Thread gamethread = new Thread(StartGame);
+>         gamethread.Start();
+> 
+>     }
+> 
+>     private void StartGame() {
+>         Game1 game = new Game1();
+>         game.Run();
+>     }
+> ```
+
+> Usado para iniciar o jogo quando o jogador clicar num botão
+> 
+> - O constructor Startscreen() chama a função InitializeComponent() para inicializar o "Form"
+
+> button1_Click() é um event handler que é chamado quando o jogador clica no botão "button1" designado no "Form"
+> 
+> - Cria um novo objeto "Thread" chamado "gamethread" que, por sua vez, vai executar a função "StartGame", através de "gamethread.Start"
+
+> Start()ame" cria uma nova instância chamada "Game1" e executa a função Run()
+
+---
+
+### Collectibles.cs
+
+> ```csharp
+> class Collectible {
+>     public ContentManager content;
+>     public Texture2D texture;
+>     public Vector2 position;
+>     public int width, height;
+>     public Rectangle bounds;
+>     public Player player;
+> 
+>     public Collectible(ContentManager content,Player player,String tex,int x, int y) {
+>         this.player = player;
+>         this.content = content;          
+>         texture = content.Load<Texture2D>(tex);          
+>         width = texture.Width;
+>         height = texture.Height;
+>         position = new Vector2(x, y);
+>         bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
+>     }
+> 
+>     public virtual void refresh() {
+>         bounds.X = (int)position.X;
+>         bounds.Y = (int)position.Y;
+>     }
+> 
+>     public Rectangle getBounds() {
+>         refresh();
+>         return bounds;
+>     }
+> 
+>     public void checkCollision() {
+>         refresh();
+>         if (bounds.Intersects(player.getBounds())) {
+>             dispose();               
+>             collect();              
+>         }
+>     }
+> 
+>     public void dispose() {
+>         position.X = -1280;
+>         position.Y = 0;          
+>         refresh();
+>     }
+> 
+>     public virtual void collect() {
+>         //override and do some stuff
+>     }
+> ```
+> 
+> Atributos da class "Collectible" são (tipo de dado / nome da variavel):
+> 
+> - ContentManager content;
+> 
+> - Texture2D texture;
+> 
+> - Vector2 position;
+> 
+> - int width;
+> 
+> - int  height;
+> 
+> - Rectangle bounds;
+> 
+> - Player player;
+
+> O método refresh() atualiza a hitbox do objeto e define valores x e y.
+> 
+> É utilizado por GetBounds(), para atualizar o retângulo com a sua posição atual, em seguida retorna o retângulo atualizado.
+
+> Se houver interseção entre "bounds" e "player", a função checkCollision() chama as funções "dispose" e collect.
+
+---
+
+### Monster.cs
+
+> ```csharp
+> class Monster {
+>     public ContentManager content;
+>     public Texture2D texture;
+>     public Vector2 position;
+>     public int width, height;
+>     public Rectangle bounds,right,left,top;
+>     public Player player;
+>     public int rotation = 0;
+>     public bool collusingRight,collusingLeft;
+> 
+>     public Monster(ContentManager content, Player player, String tex, int x, int y) {
+>         this.player = player;
+>         this.content = content;
+>         texture = content.Load<Texture2D>(tex);
+>         width = texture.Width;
+>         height = texture.Height;
+>         position = new Vector2(x, y);
+>         bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
+>         left = new Rectangle((int)position.X, (int)position.Y + 5, 5, height - 10);
+>         top = new Rectangle((int)position.X, (int)position.Y , width, 10);
+>         right = new Rectangle((int)position.X + width - 5, (int)position.Y + 5, 5, height - 10);
+>     }
+> 
+>     public void refresh() {
+>         left.X = (int)position.X;
+>         left.Y = (int)position.Y + 5;
+>         right.X = (int)position.X + width - 5;
+>         right.Y = (int)position.Y + 5;
+>         top.X = (int)position.X;
+>         top.Y = (int)position.Y;
+>     }
+> 
+>     public void refbounds() {
+>         bounds.X = (int)position.X;
+>         bounds.Y = (int)position.Y;
+>     }
+> 
+>     public void move() {
+>         if (rotation == 0) position.X += 5;
+>         if(rotation == 1) position.X -= 5;
+>     }
+> 
+>     public void checkCollision() {
+>         refbounds();
+>         refresh();
+>         if (bounds.Intersects(player.getBounds())) {                
+>         if (top.Intersects(player.getBot())) {
+>         player.position.Y -= 60;
+>         position.X = -2000;
+>         rotation = 3;
+>     }
+>     else {
+>         player.takeDamage();
+>         if (rotation == 0) {
+>             rotation = 1;
+>         }
+>         else if (rotation == 1) {
+>             rotation = 0;
+>         }
+>     }
+> 
+>     public Rectangle getLeft() {
+>         refresh();
+>         return left;
+>     }
+>     public Rectangle getRight() {
+>         refresh();
+>         return right;
+>     }
+> ```
+> 
+> Os atributos da classe "Monster" são:
+> 
+> - ContentManager content;
+> 
+> - Texture2D texture;
+> 
+> - Vector2 position;
+> 
+> - int width;
+> 
+> - int  height;
+> 
+> - Rectangle bounds,right,left,top;
+> 
+> - Player player;
+> 
+> - int rotation = 0;
+> 
+> - bool collusingRight,collusingLeft;
+
+> `refresh()` e `refbounds()` têm a mesma funcionalidade referida anteriormente.
+
+> `move()` muda a posição de "monster" em -5 ou 5, caso "rotation" seja 1 ou 0, respetivamente.
+
+> `checkCollision()` deteta colisão entre "monster" e "player".
+> 
+> Caso o limite inferior da hitbox do player colida com "monster", "monster" morre e é removido do ecrã (-2000, -60)
+> 
+> Caso colida com o resto da hitbox, o player reverte para a sua forma norma, caso tenha power up e "monster" muda de direção
+
+> Placeholder
+
+---
+
+### Ground.cs
+
+> ```csharp
+> class Ground {
+>     public ContentManager content;
+>     public Player player;
+>     public Texture2D texture;
+>     public Vector2 position;
+>     public int width, height;
+>     public Rectangle gnd;
+> 
+>     public Ground(ContentManager content, Player player,String tex,int x, int y) {
+>         this.player = player;
+>         this.content = content;
+>         texture = content.Load<Texture2D>(tex);
+>         width = texture.Width;
+>         height = texture.Height;
+>         position = new Vector2(x, y);
+>         gnd = new Rectangle((int)position.X, (int)position.Y, width, height);
+> 
+>     }
+> 
+>     public void refresh() {
+>         gnd.X = (int)position.X;
+>         gnd.Y = (int)position.Y;
+>     }
+> 
+>     public void newBot() {
+>         refresh();
+>         if (gnd.Intersects(player.getBot())){
+> 
+>             player.velocity.Y = 0;
+>             player.position.Y = gnd.Y - player.height;            
+>             player.jumping = false;
+>             player.collusingBottom = true;
+> 
+> 
+>         }
+>         else {
+>             player.collusingBottom = false;
+>         }
+>     }
+> 
+>     public virtual void newTop() {
+>         refresh();
+>         if (gnd.Intersects(player.getT())) {               
+>             if (!player.collusingTop) {       
+>                 player.velocity.Y = 0;
+>                 player.jumping = true;                
+>                 player.position.Y = gnd.Y + height;
+>                 player.collusingTop = true;
+>             }
+> 
+>         }
+>         else {
+>             player.collusingTop = false;
+>         }
+>     }
+> 
+>     public void newLeft() {
+>         refresh();
+>         if (gnd.Intersects(player.getL())) {               
+>             player.velocity.X = 0;
+>             player.position.X = gnd.X + width;
+>             player.collusingLeft = true;
+> 
+>         }
+>         else
+>         {
+>             player.collusingLeft = false;
+>         }
+>     }
+> 
+>     public void newRight() {
+>         refresh();
+>         if (gnd.Intersects(player.getR())) {                
+>             if (!player.collusingRight) {
+>                 player.velocity.X = 0;
+>                 player.position.X = gnd.X-player.currenttexture.Width;
+>                 player.collusingRight = true;
+>             }                
+>         }
+>         else {
+>             player.collusingRight = false;
+>         }
+>     }
+> 
+>     public void checkMonsterCollision(Monster mon) {
+>         refresh();
+>         if (gnd.Intersects(mon.getLeft())) {
+>             mon.rotation = 0;
+>         }
+>         if (gnd.Intersects(mon.getRight())) {
+>             mon.rotation = 1;
+>         }
+>     }
+> 
+>     public void checkCollision() {
+>         newBot();
+>         newTop();
+>         newRight();
+>         newLeft();
+>     }
+> ```
+> 
+> Os atributos desta classe são: 
+> 
+> - ContentManager content;
+> 
+> - Player player;
+> 
+> - Texture2D texture;
+> 
+> - Vector2 position;
+> 
+> - int width;
+> 
+> - int height;
+> 
+> - Rectangle gnd;
+
+> refresh() tem a mesma funcionalidade referida anteriormente.
+
+> newBot() verifica se ocurreu uma colisão no limite inferior da hitbox. 
+> 
+> Se sim, a velocidade do player fica 0, ajusta a posição para que fique no chão e torna "collusingBottom" como true, indicando que o limite está a colidir com um objeto. 
+> 
+> Caso não exista colisão, "collusingBottom" é false.
+
+> newTop() verifica se ocurreu uma colisão com o topo da hitbox. 
+> 
+> Se sim, a velocidade vertical do player passa a 0 e a posição do player passa para cima do objeto ground. 
+> 
+> Caso contrário, collusingTop é false.
+
+> Ambos newLeft() e newRight() têm a mesma funcionalidade para os respetivos lados da hitbox.
+> 
+> Caso haja uma colisão, "collusingLeft" e "collusingRight" ficam true e o movimento horizontal do player fica 0.
+> 
+> Caso contrário, "collusingLeft" e "collusingRight" são false.
+
+> checkMonsterCollision() verifica se há ocurreu colisão de um "monstre" e "ground".
+> 
+> Caso se sim, no lado esquerdo, torna rotation = 0.
+> 
+> No lado direito, rotation = 1.
+
+> checkCollision() é chamada continuamente durante o jogo, para verificar se houveram colisões.
