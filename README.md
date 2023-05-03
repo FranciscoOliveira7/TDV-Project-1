@@ -1,12 +1,95 @@
 # Mario Remastered
 
-Mario Remastered trata-se de uma pequena cópia
+Mario Remastered trata-se de um pequeno remake que inclui apenas 1 nível no total e o movimento do jogador.
 
 ## Trabalho realizado por:
 
 - [Francisco Oliveira](https://github.com/Sincops) - 25979
 - [Tomás Carvalho](https://github.com/GR3ENP1G08) - 25963
-- [João Rego] - 26533
+- [João Rego](https://github.com/Sewerat29) - 26533
+
+# Funcionalidades
+
+- O personagem é controlado pelas setas do teclado
+
+- Se pressionar X no teclado muda o estado do personagem, troca entre mario pequeno, grande e mario de fogo.
+
+- O esc no teclado fecha o jogo.
+
+- Os inimigos movem se da direita para esquerda e vice-versa ate baterem contra uma superficie.
+
+- Para matar os inimigos do jogo basta cair em cima deles.
+
+- Por enquanto não tem gameover ou morte do personagem então quando se leva dano e esta grande vira se pequeno e em pequeno os inimigos batem contra o personagem mas ele não morre.
+
+- Tem musica de fundo e efeito sonoros.
+
+---
+
+## Organização das Pastas e Ficheiros
+
+#### Pasta Inicial - "marioremastered"
+
+- Esta pasta inicial contêm as seguintes subpastas e ficheiros:
+  - .git;
+  - MarioRemastered;
+  - source;
+  - .gitattributes;
+  - image;
+  - README.
+
+##### . git
+
+- Esta pasta permanece escondida a não ser que o utilizador revele hidden items, através de View > Show > Hidden Items.
+- Contêm todos os ficheiros necessários para manipular o repositório do git.
+
+##### MarioRemastered
+
+- Onde está situado o ficheiro .exe (executable) do jogo, denominado por MarioRemastered.
+- Vários ficheiros .dll e .xml:
+  - **. dll (Dynamic Link Library):** tipo de ficheiro que contêm código e dados que podem ser usados por váriso programas, de maneira a poupar memória;
+  - **. xml (Extensible Markup Language):** usado para armazenamento de dados, ficheiros de configuração e serviços web.
+- Um Manifest file e um .pdb:
+  - **. Manifest:** contêm informação sobre os ficheiros que compõem uma determindada aplicação;
+  - **. pbd (Program Database):** gerado por um compiler ou linker. Contêm informação que ajuda developers com o debug do código.
+- **Content:**  onde estão guardados os ficheiros .xnb:
+  - **. xnb (XNA Game Studio binary file):** usado para guardar e dar load a conteúdo como graficos, ficheiros de som e outros ficheiros que compõem um jogo. 
+
+##### source
+
+- **MarioRemastered:**
+  - Contêm o source code correspondentes ao projeto.
+  - **bin (binary):** contêm o codigo compilado do projeto que o programa consegue executar. Também, incluí uma série de .dll, .xml.
+  - **Content:** assets do jogo, como sprites, musica, etc. Incluí 2 pastas, bin e obj.
+    - **bin:** vários ficheiros .xnb.
+    - **obj:** ficheiros alusivos ao Monogame como .mgcontent e .mgstats. 
+  - **obj:** incluí pastas x86 > Debug.
+    - .exe;
+    - c# sources files;
+    - cache;
+      - **cache:** dados temporários que permitem acesso rápido a dados e ficheiros usados frequentemente.
+    - pdb
+    - resources
+    - Text documenta
+  - **Properties:** contêm AssemblyInfo.cs.
+  - **AssemblyInfo.cs:** metadata sobre um programa, incluindo a sua versão, copyright e outros dados associados.
+  - Vários ficheiros .cs, um ICO, Manifest e .rexs.
+    - **ICO (Icon):** tipo de ficheiro usado para indicadores visuais para ficheiros, pastas, etc.
+    - **resx (resource XML):** um tipo de ficheiro XL que usa a framework .NET.
+- **vs:** pasta escondida, criada pelo ide (integrated development environment) Visual Studio que contêm informação sobre a configuração e estado de um projeto. Informação como definições do ide e debug.
+- **sln (solution):** contêm informação sobre a estrutura do projeto, dependências e configurações da build. Também é usado para manter informação sobre a versão do projeto.
+
+##### .gitattributes
+
+- usado pelo git para determinar instruções e atributos para ficheiros e pastas.
+
+##### image.jpg
+
+- Curta descrição do projeto em formato .jpg.
+
+##### README
+
+- ficheiro de texto com informação sobre os controlos do jogo, criador, demo, bugs, créditos aos autores da música, etc.
 
 ---
 
@@ -197,4 +280,50 @@ Mario Remastered trata-se de uma pequena cópia
 > 
 > Caso o Mário esteja no modo mini ele morre, senão diminui de tamanho e ajusta a posição para compensar a mudança de largura.
 
-> e
+> #### dwqd
+
+---
+
+## Collectibles
+
+### Coin
+
+> ```cs
+> static SoundEffect altin;
+> public Coin(ContentManager content, Player player, string tex, int x, int y) : base(content, player, tex, x, y)
+> {
+>     altin = content.Load<SoundEffect>("altin");
+> }
+> ```
+> 
+> Cria o objeto altin que é o soundeffect da coin
+> 
+> O soundeffect "altin" é carregado
+
+> ```cs
+> public override void collect()
+> {
+>     player.collectCoin();
+>     altin.Play(1, 0, 0);
+> }
+> ```
+> 
+> Chama o método `collectCoin()` do player para a moeda ser coletada
+> 
+> Chama o método `Play()` do altin para realizar o som da moeda a ser coletada
+
+### CoinGround
+
+> ```cs
+> int counter = 0;
+> static SoundEffect altin;
+> public CoinGround(int sayac,ContentManager content, Player player, string tex, int x, int y) : base(content, player, tex, x, y)
+> {
+>     counter = sayac;
+>     altin = content.Load<SoundEffect>("altin");
+> }
+> ```
+> 
+> Inicializa o counter com valor 0
+> 
+> Cria o objeto altin que é o soundeffect da coin.
